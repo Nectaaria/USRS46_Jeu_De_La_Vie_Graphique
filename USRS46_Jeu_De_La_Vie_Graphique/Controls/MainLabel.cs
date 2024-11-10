@@ -14,6 +14,9 @@ namespace USRS46_Jeu_De_La_Vie_Graphique.Controls
         {
             Name = "main_label";
             Text = "";
+            BorderStyle = BorderStyle.FixedSingle;
+            TextAlign = ContentAlignment.MiddleCenter;
+            Size = new Size(100, 23);
         }
     }
 }
