@@ -10,14 +10,19 @@ using System.Windows.Forms;
 
 namespace USRS46_Jeu_De_La_Vie_Graphique
 {
-    public partial class Form1 : Form
+    public partial class Interface : Form
     {
-        public Form1()
+        public Interface()
         {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
