@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cell.cs" />
-    <Compile Include="Controls\Label.cs" />
+    <Compile Include="Controls\MainLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MainPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
