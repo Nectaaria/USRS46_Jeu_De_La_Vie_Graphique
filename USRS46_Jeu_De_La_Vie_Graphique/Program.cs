@@ -17,8 +17,6 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-            Game game = new Game(4, 10);
-            game.RunGameConsole();
         }
     }
 }

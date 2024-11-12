@@ -46,6 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Cell.cs" />
+    <Compile Include="Controls\Coords.cs" />
+    <Compile Include="Controls\Game.cs" />
+    <Compile Include="Controls\Grid.cs" />
+    <Compile Include="Controls\MainWindow.cs" />
+    <Compile Include="Controls\TextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

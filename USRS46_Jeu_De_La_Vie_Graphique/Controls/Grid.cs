@@ -9,10 +9,10 @@ namespace USRS46_Jeu_De_La_Vie_Graphique.Controls
     public class Grid
     {
         // taille de la grille
-        private int _n { get; set; }
+        public int _n { get; set; }
 
         // Tableau à deux dimensions contenant des objets de type Cell
-        Cell[,] tabCells;
+        public Cell[,] TabCells;
 
         // Constructeur de la classe Grid
         public Grid(int nbCells, List<Coords> AliveCellsCoords)
@@ -21,7 +21,7 @@ namespace USRS46_Jeu_De_La_Vie_Graphique.Controls
             this._n = nbCells;
 
             // Création d’un tableau à deux dimensions de taille _n,_n
-            tabCells = new Cell[_n, _n];
+            TabCells = new Cell[_n, _n];
 
             /* Remplissage du tableau avec à chaque emplacement une instance d’une cellule Cell créée vivante (true) si les
             coordonnées sont dans la liste AliveCellsCoords ou absente (false) sinon. */
@@ -29,7 +29,7 @@ namespace USRS46_Jeu_De_La_Vie_Graphique.Controls
             {
                 for (int j = 1; j <= _n; j++)
                 {
-                    tabCells[i - 1, j - 1] = new Cell(AliveCellsCoords.Exists(coords => coords._x == j && coords._y == i));
+                    TabCells[i - 1, j - 1] = new Cell(AliveCellsCoords.Exists(coords => coords._x == j && coords._y == i));
                 }
             }
         }
@@ -71,7 +71,7 @@ namespace USRS46_Jeu_De_La_Vie_Graphique.Controls
             {
                 for (int j = 0; j < _n; j++)
                 {
-                    if (tabCells[i, j].isAlive)
+                    if (TabCells[i, j].isAlive)
                         cellsAlive.Add(new Coords(i, j));
                 }
             }
@@ -87,7 +87,7 @@ namespace USRS46_Jeu_De_La_Vie_Graphique.Controls
                 Console.Write("|");
                 for (int j = 0; j < _n; j++)
                 {
-                    Console.Write(" " + (tabCells[i, j].isAlive ? "X" : " ") + " |");
+                    Console.Write(" " + (TabCells[i, j].isAlive ? "X" : " ") + " |");
                 }
                 Console.WriteLine();
             }
@@ -104,15 +104,15 @@ namespace USRS46_Jeu_De_La_Vie_Graphique.Controls
             {
                 for (int j = 0; j < _n; j++)
                 {
-                    if (!tabCells[i, j].isAlive && getNbAliveNeighboor(i, j) == 3)
-                        tabCells[i, j].ComeAlive();
-                    else if (tabCells[i, j].isAlive && getNbAliveNeighboor(i, j) != 2 && getNbAliveNeighboor(i, j) != 3)
-                        tabCells[i, j].PassAway();
+                    if (!TabCells[i, j].isAlive && getNbAliveNeighboor(i, j) == 3)
+                        TabCells[i, j].ComeAlive();
+                    else if (TabCells[i, j].isAlive && getNbAliveNeighboor(i, j) != 2 && getNbAliveNeighboor(i, j) != 3)
+                        TabCells[i, j].PassAway();
                     else
-                        tabCells[i, j].nextState = tabCells[i, j].isAlive;
+                        TabCells[i, j].nextState = TabCells[i, j].isAlive;
                 }
             }
-            foreach (var cell in tabCells)
+            foreach (var cell in TabCells)
             {
                 cell.Update();
             }
