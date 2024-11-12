@@ -18,10 +18,10 @@ namespace USRS46_Jeu_De_La_Vie_Graphique.Controls
         public Grid(int nbCells, List<Coords> AliveCellsCoords)
         {
             // Initialisation de l’attribut _n au travers de l’accesseur en écriture
-            this._n = nbCells;
+            _n = nbCells;
 
             // Création d’un tableau à deux dimensions de taille _n,_n
-            TabCells = new Cell[_n, _n];
+            TabCells = new Cell[_n,_n];
 
             /* Remplissage du tableau avec à chaque emplacement une instance d’une cellule Cell créée vivante (true) si les
             coordonnées sont dans la liste AliveCellsCoords ou absente (false) sinon. */

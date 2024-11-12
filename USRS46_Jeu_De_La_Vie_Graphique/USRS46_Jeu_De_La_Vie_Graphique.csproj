@@ -51,6 +51,12 @@
     <Compile Include="Controls\Game.cs" />
     <Compile Include="Controls\Grid.cs" />
     <Compile Include="Controls\MainWindow.cs" />
+    <Compile Include="Controls\PauseButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\PlayButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\TextBox.cs">
       <SubType>Component</SubType>
     </Compile>
