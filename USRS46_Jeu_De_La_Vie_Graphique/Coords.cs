@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace USRS46_Jeu_De_La_Vie_Graphique.Controls
 {
-    public class Coords
+    public struct Coords
     {
         public int _x { get; set; }
         public int _y { get; set; }
