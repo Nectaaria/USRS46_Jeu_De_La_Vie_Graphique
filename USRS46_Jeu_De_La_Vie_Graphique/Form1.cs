@@ -15,12 +15,14 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
 {
     public partial class Interface : Form
     {
-        private int n;
-        private int generation;
-        public Game game;
-        private Timer _timer;
-        private MainWindow _mainWindow;
-        private TextBox _textBox;
+        int n;
+        public static int generation;
+        Game game;
+        Timer _timer;
+        MainWindow _mainWindow;
+        TextBox _textBox;
+        PlayButton _playButton;
+        PauseButton _pauseButton;
         
         public Form1()
         {
@@ -29,13 +31,13 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
             InitializeComponent();
             
             // Initialisation de la variable contenant la taille de notre MainWindow
-            n = 125;
+            n = 40;
             
             // Initialisation de la variable coorespondant à la génération actuelle de cellules
             generation = 0;
             
             // Initialisation du jeu à partir de notre classe Game
-            game = new Game(20,10);
+            game = new Game(n,10);
             
             // Initialisation du timer
             _timer = new Timer();
@@ -44,16 +46,32 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
             
             // Initialisation de la MainWindow en utilisant notre classe
             _mainWindow = new MainWindow(n);
-            _mainWindow.Location = new Point((Size.Width - n) / 2, 50);
+            _mainWindow.Location = new Point((ClientSize.Width - _mainWindow.Width) / 2, (this.ClientSize.Height - _mainWindow.Height) / 2);
+            _mainWindow.Anchor = AnchorStyles.None;
             _mainWindow.Paint += new PaintEventHandler(_mainWindow_Paint);
+            
+            // Initialisation du bouton Play
+            _playButton = new PlayButton();
+            _playButton.Location = new Point((ClientSize.Width - _playButton.Width) / 2, _mainWindow.Location.Y + _mainWindow.Height + 25);
+            _playButton.Anchor = AnchorStyles.None;
+            _playButton.Click += new EventHandler(btn_play_Click);
+            
+            // Initialisation du bouton Pause
+            _pauseButton = new PauseButton();
+            _pauseButton.Location = new Point(ClientSize.Width + 18, ClientSize.Height + _mainWindow.Height - 45);
+            _pauseButton.Anchor = AnchorStyles.None;
+            _pauseButton.Click += new EventHandler(btn_pause_Click);
             
             // Initialisation de la TextBox en utilisant notre classe
             _textBox = new TextBox();
-            _textBox.Location = new Point(_mainWindow.Location.X, _mainWindow.Location.Y + 50);
+            _textBox.Location = new Point((ClientSize.Width - _textBox.Width) / 2, _mainWindow.Location.Y - 50);
+            _textBox.Anchor = AnchorStyles.None;
+            _textBox.Text = generation.ToString();
             
             // Ajout des éléments à notre fenêtre
             Controls.Add(_mainWindow);
             Controls.Add(_textBox);
+            Controls.Add(_playButton);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -66,7 +84,8 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
         private void UpdateGrid(object sender, EventArgs e)
         {
             // Mise à jour de la grille du jeu
-            game.grid.UpdateGrid();
+            game.RunGame();
+            _mainWindow.Invalidate();
             
             // Incrémentation de 1 de la variable generation
             generation++;
@@ -75,7 +94,21 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
             _textBox.Text = generation.ToString();
 
             //Mise à jour de la fenêtre graphique
-            
+            _mainWindow.Refresh();
+        }
+
+        private void btn_play_Click(object sender, EventArgs e)
+        {
+            _timer.Start();
+            Controls.Remove(_playButton);
+            Controls.Add(_pauseButton);
+        }
+        
+        private void btn_pause_Click(object sender, EventArgs e)
+        {
+            _timer.Stop();
+            Controls.Remove(_pauseButton);
+            Controls.Add(_playButton);
         }
 
         private void _mainWindow_Paint(object sender, PaintEventArgs e)
@@ -83,7 +116,7 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
             var g = e.Graphics;
             g.Clear(_mainWindow.BackColor);
             // Définir une brush blanche
-            SolidBrush whiteBrush = new SolidBrush(Color.White);
+            Brush whiteBrush = Brushes.White;
 
             // Boucler sur l’ensemble de la grille
             for(int i = 0; i < game.grid._n; i++)
@@ -91,14 +124,11 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
                 for (int j = 0; j < game.grid._n; j++)
                 {
                     // Si la cellule à cet emplacement est vivante
-                    if (game.grid.TabCells[i,j].isAlive)
-                    {
+                    if (game.grid.TabCells[i, j].isAlive)
                         // Dessiner un rectangle plein à partir de la brush blanche de 5 par 5 pixels
                         g.FillRectangle(whiteBrush, 5 * i, 5 * j, 5, 5);
-                    }
                 }
             }
         }
-
     }
 }
