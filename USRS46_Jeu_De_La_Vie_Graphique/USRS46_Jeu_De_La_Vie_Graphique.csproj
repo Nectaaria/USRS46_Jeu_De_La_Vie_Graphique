@@ -57,6 +57,9 @@
     <Compile Include="Controls\PlayButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\RestartButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\TextBox.cs">
       <SubType>Component</SubType>
     </Compile>
