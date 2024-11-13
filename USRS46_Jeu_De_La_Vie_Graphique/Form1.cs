@@ -81,8 +81,16 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
         private void UpdateGrid(object sender, EventArgs e)
         {
             // Mise à jour de la grille du jeu
+            if (game.grid.end == true) 
+            {
+                _timer.Stop();
+                Controls.Remove(_pauseButton);
+                //Controls.Add(_restartButton);
+            } 
             game.RunGame();
             _mainWindow.Invalidate();
+            
+            
             
             // Incrémentation de 1 de la variable generation
             generation++;

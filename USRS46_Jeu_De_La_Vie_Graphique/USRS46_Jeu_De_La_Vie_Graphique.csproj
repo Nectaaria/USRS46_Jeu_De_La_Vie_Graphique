@@ -50,7 +50,9 @@
     <Compile Include="Controls\Coords.cs" />
     <Compile Include="Controls\Game.cs" />
     <Compile Include="Controls\Grid.cs" />
-    <Compile Include="Controls\MainWindow.cs" />
+    <Compile Include="Controls\MainWindow.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\PauseButton.cs">
       <SubType>Component</SubType>
     </Compile>

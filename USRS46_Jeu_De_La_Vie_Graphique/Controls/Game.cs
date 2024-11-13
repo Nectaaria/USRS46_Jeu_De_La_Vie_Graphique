@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -47,7 +48,7 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
         // Méthode de supervisation qui implémente le mécanisme au coeur de la simulation d’après les étapes suivantes.
         public void RunGame()
         {
-                grid.UpdateGrid();
+            grid.UpdateGrid(); 
         }
     }
 }

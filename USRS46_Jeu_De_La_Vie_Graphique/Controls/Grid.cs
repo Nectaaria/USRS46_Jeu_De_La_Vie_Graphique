@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
     {
         // taille de la grille
         public int _n { get; set; }
+        public bool end = false;
+        public Cell[,] pastCell;
 
         // Tableau à deux dimensions contenant des objets de type Cell
         public Cell[,] TabCells;
@@ -22,7 +25,7 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
             _n = nbCells;
 
             // Création d’un tableau à deux dimensions de taille _n,_n
-            TabCells = new Cell[_n,_n];
+            TabCells = new Cell[_n, _n];
 
             /* Remplissage du tableau avec à chaque emplacement une instance d’une cellule Cell créée vivante (true) si les
             coordonnées sont dans la liste AliveCellsCoords ou absente (false) sinon. */
@@ -33,6 +36,7 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
                     TabCells[i - 1, j - 1] = new Cell(AliveCellsCoords.Exists(coords => coords._x == j && coords._y == i));
                 }
             }
+            pastCell = TabCells;
         }
 
         // Méthode qui permet de déterminer le nombre de cellules vivantes autour d’un emplacement de coordonnées (i,j)
@@ -94,13 +98,13 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
             }
             Console.WriteLine("+" + String.Concat(Enumerable.Repeat("---+", _n)));
         }
-
+        
         /* Méthode qui parcourt chaque cellule et qui met à jour leur attribut _nextStep, via son accesseur en écriture, en
         fonction des règles de la simulation. L’attribut est mis à true si la cellule reste en vie ou apparaît et à false si
         la cellule à cet emplacement disparaît ou reste absente. Une fois toute la grille parcourue, une deuxième passe est
         effectué pour associer la valeur de nexStep à l’attribut isAlive de chaque cellule. */
         public void UpdateGrid()
-        {
+        {   
             for (int i = 0; i < _n; i++)
             {
                 for (int j = 0; j < _n; j++)
@@ -112,11 +116,21 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
                     else
                         TabCells[i, j].nextState = TabCells[i, j].isAlive;
                 }
-            }
-            foreach (var cell in TabCells)
+            }  
+            if (pastCell == TabCells)     
             {
-                cell.Update();
+                foreach (var cell in TabCells)
+                {
+                    cell.Update();
+                }
+                pastCell = TabCells;
+                end = false;
+            }
+            else
+            {
+                end = true;
             }
         }
+        
     }
 }
