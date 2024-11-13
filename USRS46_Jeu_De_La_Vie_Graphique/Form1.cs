@@ -87,18 +87,28 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
         
         private void UpdateGrid(object sender, EventArgs e)
         {
-            // Mise à jour de la grille du jeu
-            _game.RunGame();
-            _mainWindow.Invalidate();
-            
-            // Incrémentation de 1 de la variable generation
-            generation++;
-            
-            // Mise à jour du label avec la valeur contenue dans generation
-            _textBox.Text = generation.ToString();
+            if (_game.grid.endSimulation)
+            {
+                // Cas de fin d'une simulation répétitive
+                _timer.Stop();
+                Controls.Add(_restartButton);
+                Controls.Remove(_pauseButton);
+            }
+            else
+            {
+                // Mise à jour de la grille du jeu
+                _game.grid.UpdateGrid();
+                _mainWindow.Invalidate();
 
-            //Mise à jour de la fenêtre graphique
-            _mainWindow.Refresh();
+                // Incrémentation de 1 de la variable generation
+                generation++;
+
+                // Mise à jour du label avec la valeur contenue dans generation
+                _textBox.Text = generation.ToString();
+
+                //Mise à jour de la fenêtre graphique
+                _mainWindow.Refresh();
+            }
         }
 
         private void btn_play_Click(object sender, EventArgs e)

@@ -45,7 +45,7 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
         }
 
         // Méthode de supervisation qui implémente le mécanisme au coeur de la simulation d’après les étapes suivantes.
-        public void RunGame()
+        public void RunGameConsole()
         {
                 grid.UpdateGrid();
         }

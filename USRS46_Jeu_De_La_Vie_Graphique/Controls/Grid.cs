@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using USRS46_Jeu_De_La_Vie_Graphique.Controls;
 
 namespace USRS46_Jeu_De_La_Vie_Graphique
 {
     public class Grid
     {
+        // Bouléen signalant une fin de simulation
+        public bool endSimulation { get; set;}
+        
         // taille de la grille
         public int _n { get; set; }
 
@@ -113,8 +117,11 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
                         TabCells[i, j].nextState = TabCells[i, j].isAlive;
                 }
             }
+            endSimulation = true;
             foreach (var cell in TabCells)
             {
+                if (cell.isAlive != cell.nextState)
+                    endSimulation = false;
                 cell.Update();
             }
         }
