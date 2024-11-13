@@ -29,7 +29,7 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
             iter = nbIterations;
             AliveCellsCoords = new List<Coords>();
 
-            for (int i = 0; i < rnd.Next(100, 200); i++)
+            for (int i = 0; i < rnd.Next(10000, 14000); i++)
             {
                 int x = rnd.Next(n);
                 int y = rnd.Next(n);

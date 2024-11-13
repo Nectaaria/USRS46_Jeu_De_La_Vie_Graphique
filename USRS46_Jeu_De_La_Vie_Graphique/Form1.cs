@@ -29,7 +29,7 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
             InitializeComponent();
             
             // Initialisation de la variable contenant la taille de notre MainWindow
-            n = 40;
+            n = 125;
             
             // Initialisation de la variable coorespondant à la génération actuelle de cellules
             generation = 0;
@@ -50,19 +50,19 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
             
             // Initialisation du bouton Play
             _playButton = new PlayButton();
-            _playButton.Location = new Point((ClientSize.Width - _playButton.Width) / 2, _mainWindow.Location.Y + _mainWindow.Height + 25);
+            _playButton.Location = new Point(_mainWindow.Location.X - 6, _mainWindow.Location.Y + _mainWindow.Size.Height + 25);
             _playButton.Anchor = AnchorStyles.None;
             _playButton.Click += new EventHandler(btn_play_Click);
             
             // Initialisation du bouton Pause
             _pauseButton = new PauseButton();
-            _pauseButton.Location = new Point(ClientSize.Width + 18, ClientSize.Height + _mainWindow.Height - 45);
+            _pauseButton.Location = new Point(ClientSize.Width + 20, ClientSize.Height * 2 + 2);
             _pauseButton.Anchor = AnchorStyles.None;
             _pauseButton.Click += new EventHandler(btn_pause_Click);
             
             // Initialisation du bouton Restart
             _restartButton = new RestartButton();
-            _restartButton.Location = new Point(ClientSize.Width + 18, ClientSize.Height + _mainWindow.Height);
+            _restartButton.Location = new Point(790, ClientSize.Height * 2 + 2);
             _restartButton.Anchor = AnchorStyles.None;
             _restartButton.Click += new EventHandler(btn_restart_Click);
             
@@ -93,6 +93,7 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
                 _timer.Stop();
                 Controls.Add(_restartButton);
                 Controls.Remove(_pauseButton);
+                Controls.Remove(_playButton);
             }
             else
             {

@@ -11,7 +11,7 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
     public class Grid
     {
         // Bouléen signalant une fin de simulation
-        public bool endSimulation { get; set;}
+        public bool endSimulation;
         
         // taille de la grille
         public int _n { get; set; }
@@ -43,9 +43,9 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
         public int getNbAliveNeighboor(int i, int j)
         {
             int nbAliveNeighboors = 0;
-            foreach (var coords in getCoordsCellsAlive())
+            foreach (var coords in getCoordsNeighboors(i, j))
             {
-                if (getCoordsNeighboors(i, j).Exists(coordinates => coordinates._x == coords._x && coordinates._y == coords._y))
+                if (TabCells[coords._x,coords._y].isAlive)
                     nbAliveNeighboors++;
             }
             return nbAliveNeighboors;
