@@ -5,12 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using USRS46_Jeu_De_La_Vie_Graphique.Controls;
 using TextBox = USRS46_Jeu_De_La_Vie_Graphique.Controls.TextBox;
-using Timer = System.Windows.Forms.Timer;
 
 namespace USRS46_Jeu_De_La_Vie_Graphique
 {
