@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using USRS46_Jeu_De_La_Vie_Graphique.Controls;
 
 namespace USRS46_Jeu_De_La_Vie_Graphique
@@ -11,6 +12,7 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
 
     public class Game
     {
+        private Random rnd = new Random();
         // taille de la grille
         private int n;
         // nombre d’itérations de la simulation
@@ -25,25 +27,27 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
         {
             n = nbCells;
             iter = nbIterations;
-            AliveCellsCoords = new List<Coords>() { new Coords(1, 2), new Coords(2, 2), new Coords(3, 2) };
+            AliveCellsCoords = new List<Coords>();
 
-            grid = new Grid(nbCells, AliveCellsCoords);
+            for (int i = 0; i < rnd.Next(100, 200); i++)
+            {
+                int x = rnd.Next(n);
+                int y = rnd.Next(n);
+                AliveCellsCoords.Add(new Coords(x, y));
+            }
+
+            grid = new Grid(n, AliveCellsCoords);
+
+            foreach (Coords coords in AliveCellsCoords)
+            {
+                grid.TabCells[coords._x, coords._y].ComeAlive();
+            }
         }
 
         // Méthode de supervisation qui implémente le mécanisme au coeur de la simulation d’après les étapes suivantes.
-        public void RunGameConsole()
+        public void RunGame()
         {
-            // Affiche en console une représentation graphique de la grille et des cellules vivantes.
-            grid.DisplayGrid();
-            for (int i = 0; i < iter; i++)
-            {
-                /* Applique les règles du jeu et détermine quelles seront les cellules vivantes au prochain pas de la
-                simulation. */
                 grid.UpdateGrid();
-                grid.DisplayGrid();
-                // Met en pause le programme 1s avant d’entamer le prochain passage dans la boucle.
-                Thread.Sleep(1000);
-            }
         }
     }
 }

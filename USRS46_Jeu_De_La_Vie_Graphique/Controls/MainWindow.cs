@@ -8,7 +8,7 @@ namespace USRS46_Jeu_De_La_Vie_Graphique.Controls
     {
         public MainWindow(int n)
         {
-            BackColor = Color.MidnightBlue;
+            BackColor = Color.Black;
             Size = new Size(n * 5, n * 5);
         }
     }
