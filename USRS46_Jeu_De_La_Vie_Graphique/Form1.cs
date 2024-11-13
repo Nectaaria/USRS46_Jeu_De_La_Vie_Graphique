@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using USRS46_Jeu_De_La_Vie_Graphique.Controls;
 using TextBox = USRS46_Jeu_De_La_Vie_Graphique.Controls.TextBox;
+using Timer = System.Windows.Forms.Timer;
 
 namespace USRS46_Jeu_De_La_Vie_Graphique
 {
-    public partial class Interface : Form
+    public partial class Form1 : Form
     {
         int n;
         public static int generation;
@@ -26,8 +27,6 @@ namespace USRS46_Jeu_De_La_Vie_Graphique
         
         public Form1()
         {
-            main_label = new MainLabel();
-            main_picturebox = new MainPictureBox(n);
             InitializeComponent();
             
             // Initialisation de la variable contenant la taille de notre MainWindow
